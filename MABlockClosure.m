@@ -31,12 +31,12 @@ struct Block
 
 static void *BlockImpl(id block)
 {
-    return ((struct Block *)block)->invoke;
+    return ((__bridge struct Block *)block)->invoke;
 }
 
 static const char *BlockSig(id blockObj)
 {
-    struct Block *block = (void *)blockObj;
+    struct Block *block = (__bridge void *)blockObj;
     struct BlockDescriptor *descriptor = block->descriptor;
     
     int copyDisposeFlag = 1 << 25;
@@ -53,7 +53,7 @@ static const char *BlockSig(id blockObj)
 
 static void BlockClosure(ffi_cif *cif, void *ret, void **args, void *userdata)
 {
-    MABlockClosure *self = userdata;
+    MABlockClosure *self = (__bridge MABlockClosure *)(userdata);
     
     int count = self->_closureArgCount;
     void **innerArgs = malloc((count + 1) * sizeof(*innerArgs));
@@ -99,7 +99,7 @@ static const char *SizeAndAlignment(const char *str, NSUInteger *sizep, NSUInteg
 {
     const char *out = NSGetSizeAndAlignment(str, sizep, alignp);
     if(len)
-        *len = out - str;
+        *len = (int)(out - str);
     while(isdigit(*out))
         out++;
     return out;
@@ -278,7 +278,7 @@ static int ArgCount(const char *str)
         abort();
     }
 #else
-    ffi_status status = ffi_prep_closure(_closure, &_closureCIF, BlockClosure, self);
+    ffi_status status = ffi_prep_closure(_closure, &_closureCIF, BlockClosure, (__bridge void *)(self));
     if(status != FFI_OK)
     {
         NSLog(@"ffi_prep_closure returned %d", (int)status);
@@ -309,10 +309,7 @@ static int ArgCount(const char *str)
 
 - (void)dealloc
 {
-    if(_closure)
-        DeallocateClosure(_closure);
-    [_allocations release];
-    [super dealloc];
+    if(_closure) DeallocateClosure(_closure);
 }
 
 - (void *)fptr
@@ -331,7 +328,6 @@ void *BlockFptr(id block)
         {
             closure = [[MABlockClosure alloc] initWithBlock: block];
             objc_setAssociatedObject(block, BlockFptr, closure, OBJC_ASSOCIATION_RETAIN);
-            [closure release]; // retained by the associated object assignment
         }
         return [closure fptr];
     }
@@ -339,5 +335,5 @@ void *BlockFptr(id block)
 
 void *BlockFptrAuto(id block)
 {
-    return BlockFptr([[block copy] autorelease]);
+    return BlockFptr([block copy]);
 }
