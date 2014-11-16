@@ -14,6 +14,8 @@
 		9674F5D21A183A1C00D7E20C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9674F5D11A183A1C00D7E20C /* Foundation.framework */; };
 		9674F5D61A183A5500D7E20C /* MABlockClosure.h in Headers */ = {isa = PBXBuildFile; fileRef = 9674F5D41A183A5500D7E20C /* MABlockClosure.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9674F5D71A183A5500D7E20C /* MABlockClosure.m in Sources */ = {isa = PBXBuildFile; fileRef = 9674F5D51A183A5500D7E20C /* MABlockClosure.m */; };
+		968F01521A18589B00AB4252 /* SwiftTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 968F01511A18589B00AB4252 /* SwiftTests.swift */; };
+		968F01551A1858E800AB4252 /* test_api.c in Sources */ = {isa = PBXBuildFile; fileRef = 968F01531A1858E800AB4252 /* test_api.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,10 @@
 		9674F5D11A183A1C00D7E20C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9674F5D41A183A5500D7E20C /* MABlockClosure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MABlockClosure.h; path = ../MABlockClosure.h; sourceTree = "<group>"; };
 		9674F5D51A183A5500D7E20C /* MABlockClosure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MABlockClosure.m; path = ../MABlockClosure.m; sourceTree = "<group>"; };
+		968F01501A18589B00AB4252 /* MABlockClosureFrameworkTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MABlockClosureFrameworkTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		968F01511A18589B00AB4252 /* SwiftTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftTests.swift; sourceTree = "<group>"; };
+		968F01531A1858E800AB4252 /* test_api.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = test_api.c; sourceTree = "<group>"; };
+		968F01541A1858E800AB4252 /* test_api.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = test_api.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +109,10 @@
 			children = (
 				9674F5C51A1839F100D7E20C /* MABlockClosureFrameworkTests.m */,
 				9674F5C31A1839F100D7E20C /* Supporting Files */,
+				968F01511A18589B00AB4252 /* SwiftTests.swift */,
+				968F01501A18589B00AB4252 /* MABlockClosureFrameworkTests-Bridging-Header.h */,
+				968F01531A1858E800AB4252 /* test_api.c */,
+				968F01541A1858E800AB4252 /* test_api.h */,
 			);
 			path = MABlockClosureFrameworkTests;
 			sourceTree = "<group>";
@@ -241,6 +251,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				9674F5C61A1839F100D7E20C /* MABlockClosureFrameworkTests.m in Sources */,
+				968F01551A1858E800AB4252 /* test_api.c in Sources */,
+				968F01521A18589B00AB4252 /* SwiftTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -372,6 +384,7 @@
 		9674F5CD1A1839F100D7E20C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -384,12 +397,15 @@
 				INFOPLIST_FILE = MABlockClosureFrameworkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MABlockClosureFrameworkTests/MABlockClosureFrameworkTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
 		9674F5CE1A1839F100D7E20C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				COMBINE_HIDPI_IMAGES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(DEVELOPER_FRAMEWORKS_DIR)",
@@ -398,6 +414,7 @@
 				INFOPLIST_FILE = MABlockClosureFrameworkTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MABlockClosureFrameworkTests/MABlockClosureFrameworkTests-Bridging-Header.h";
 			};
 			name = Release;
 		};

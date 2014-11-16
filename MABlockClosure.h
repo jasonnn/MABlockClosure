@@ -20,6 +20,6 @@
 // or a global block
 void *BlockFptr(id block);
 
-// copies/autoreleases the block, then returns
+// copies the block, then returns
 // function pointer associated to it
 void *BlockFptrAuto(id block);
