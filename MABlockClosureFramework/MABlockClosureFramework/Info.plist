@@ -7,7 +7,7 @@
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
-	<string>jsn.$(PRODUCT_NAME:rfc1034identifier)</string>
+	<string>$(PRODUCT_NAME:rfc1034identifier)</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
@@ -21,7 +21,7 @@
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2014 Jason Markham. All rights reserved.</string>
+	<string>Copyright (c) 2010, Michael Ash. All rights reserved.</string>
 	<key>NSPrincipalClass</key>
 	<string></string>
 </dict>

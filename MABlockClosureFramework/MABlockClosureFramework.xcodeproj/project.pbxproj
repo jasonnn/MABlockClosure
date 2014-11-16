@@ -14,7 +14,6 @@
 		9674F5D21A183A1C00D7E20C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9674F5D11A183A1C00D7E20C /* Foundation.framework */; };
 		9674F5D61A183A5500D7E20C /* MABlockClosure.h in Headers */ = {isa = PBXBuildFile; fileRef = 9674F5D41A183A5500D7E20C /* MABlockClosure.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		9674F5D71A183A5500D7E20C /* MABlockClosure.m in Sources */ = {isa = PBXBuildFile; fileRef = 9674F5D51A183A5500D7E20C /* MABlockClosure.m */; };
-		9674F5DB1A183E0A00D7E20C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9674F5DA1A183E0A00D7E20C /* main.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,8 +37,6 @@
 		9674F5D11A183A1C00D7E20C /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		9674F5D41A183A5500D7E20C /* MABlockClosure.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MABlockClosure.h; path = ../MABlockClosure.h; sourceTree = "<group>"; };
 		9674F5D51A183A5500D7E20C /* MABlockClosure.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MABlockClosure.m; path = ../MABlockClosure.m; sourceTree = "<group>"; };
-		9674F5D81A183DD000D7E20C /* Makefile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.make; name = Makefile; path = ../Makefile; sourceTree = "<group>"; };
-		9674F5DA1A183E0A00D7E20C /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,8 +69,6 @@
 				9674F5B41A1839F100D7E20C /* Products */,
 				9674F5D41A183A5500D7E20C /* MABlockClosure.h */,
 				9674F5D51A183A5500D7E20C /* MABlockClosure.m */,
-				9674F5D81A183DD000D7E20C /* Makefile */,
-				9674F5DA1A183E0A00D7E20C /* main.m */,
 			);
 			sourceTree = "<group>";
 		};
@@ -237,7 +232,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9674F5DB1A183E0A00D7E20C /* main.m in Sources */,
 				9674F5D71A183A5500D7E20C /* MABlockClosure.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -426,6 +420,7 @@
 				9674F5CB1A1839F100D7E20C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		9674F5CC1A1839F100D7E20C /* Build configuration list for PBXNativeTarget "MABlockClosureFrameworkTests" */ = {
 			isa = XCConfigurationList;
@@ -434,6 +429,7 @@
 				9674F5CE1A1839F100D7E20C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

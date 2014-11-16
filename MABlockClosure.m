@@ -10,6 +10,29 @@
 #endif
 
 
+#if (TARGET_OS_IPHONE && TARGET_OS_EMBEDDED) || TARGET_IPHONE_SIMULATOR
+#define USE_CUSTOM_LIBFFI 1
+#endif
+
+#if USE_CUSTOM_LIBFFI
+#import <ffi.h>
+#define USE_LIBFFI_CLOSURE_ALLOC 1
+#else // use system libffi
+#import <ffi/ffi.h>
+#endif
+
+@interface MABlockClosure (){
+    NSMutableArray *_allocations;
+    ffi_cif _closureCIF;
+    ffi_cif _innerCIF;
+    int _closureArgCount;
+    ffi_closure *_closure;
+    void *_closureFptr;
+    id _block;
+}
+
+@end
+
 @implementation MABlockClosure
 
 struct BlockDescriptor
@@ -182,6 +205,7 @@ static int ArgCount(const char *str)
         } \
     } while(0)
     
+#pragma mark -add more types here
     SINT(_Bool);
     SINT(signed char);
     UINT(unsigned char);
@@ -195,6 +219,7 @@ static int ArgCount(const char *str)
     PTR(SEL);
     PTR(void *);
     PTR(char *);
+    PTR(const char *);
     PTR(void (*)(void));
     
     COND(float, float);
@@ -293,7 +318,7 @@ static int ArgCount(const char *str)
 #endif
 }
 
-- (id)initWithBlock: (id)block
+- (instancetype)initWithBlock: (id)block
 {
     if((self = [self init]))
     {

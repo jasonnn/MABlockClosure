@@ -8,6 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 #import <XCTest/XCTest.h>
+#import <MABlockClosureFramework/MABlockClosureFramework.h>
 
 @interface MABlockClosureFrameworkTests : XCTestCase
 
@@ -15,26 +16,83 @@
 
 @implementation MABlockClosureFrameworkTests
 
-- (void)setUp {
-    [super setUp];
-    // Put setup code here. This method is called before the invocation of each test method in the class.
+
+- (void)testOne {
+    id block = ^(int x) { return x + 1; };
+    MABlockClosure *closure = [[MABlockClosure alloc] initWithBlock: block];
+    int ret = ((int (*)(int))closure.fptr)(3);
+    XCTAssertEqual(4, ret);
 }
 
-- (void)tearDown {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    [super tearDown];
+- (void)testTwo {
+    char * arg = "asdasd";
+    id block  = ^{ return arg; };
+    MABlockClosure *closure = [[MABlockClosure alloc] initWithBlock: block];
+    char *s = ((char *(*)(void))closure.fptr)();
+    XCTAssertEqual(arg, s);
+    
+}
+- (void)testTwo2 {
+    const char * arg = "asdasd";
+    id block  = ^{ return arg; };
+    MABlockClosure *closure = [[MABlockClosure alloc] initWithBlock: block];
+    char *s = ((char *(*)(void))closure.fptr)();
+    XCTAssertEqual(arg, s);
 }
 
-- (void)testExample {
-    // This is an example of a functional test case.
-    XCTAssert(YES, @"Pass");
+- (void)testThree {
+    id block = ^{ return CGRectMake(0, 0, 0, 0); };
+    MABlockClosure *closure = [[MABlockClosure alloc] initWithBlock: block];
+    CGRect r = ((CGRect (*)(void))[closure fptr])();
+    XCTAssertTrue( CGRectEqualToRect(CGRectMake(0, 0, 0, 0), r));
 }
 
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
+- (void)testFour {
+    const char * arg = "append";
+    
+    id block;
+    block = [^(NSString *s) { return [s stringByAppendingFormat: @" %s", arg]; } copy];
+    NSString *strObj = ((id (*)(id))BlockFptr(block))(@"hello");
+    
+    XCTAssert( [@"hello append" isEqualToString:strObj]);
+    
 }
+- (void)testFive {
+    id  block = ^(int x, int y) { return x + y; };
+    MABlockClosure * closure = [[MABlockClosure alloc] initWithBlock: block];
+    int ret = ((int (*)(int, int))[closure fptr])(5, 10);
+    
+    XCTAssertEqual(5+10, ret);
+}
+
+- (void)testSix {
+    __block  BOOL called = false;
+    
+    typedef void(^B0)();
+    
+    B0 block0 = ^{
+        called=true;
+    };
+    
+    id block =^{
+        block0();
+    };
+    
+    MABlockClosure *closure = [[MABlockClosure alloc] initWithBlock: block];
+    ((void (*)(void))[closure fptr])();
+    XCTAssertTrue(called);
+}
+
+- (void)testSeven {
+    __block BOOL called = false;
+    void (*fptr)(void) = BlockFptrAuto(^{ called = true;});
+    fptr();
+    
+    XCTAssertTrue(called);
+    
+}
+
+
+
 
 @end
